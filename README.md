@@ -58,3 +58,5 @@ Akun seeder: `admin / admin` dan `member / member` (+ 4 contoh stok untuk member
 composer test        # phpunit --coverage-text (butuh pcov / xdebug)
 composer audit
 ```
+
+nim:35
