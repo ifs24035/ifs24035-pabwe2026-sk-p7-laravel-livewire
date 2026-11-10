@@ -53,10 +53,16 @@ php artisan serve
 ```
 Akun seeder: `admin / admin` dan `member / member` (+ 4 contoh stok untuk member).
 
+## Optimasi UI (Lighthouse & Axe Core)
+- Tailwind dikompilasi via **Vite** (`@vite('resources/css/app.css')`), bukan CDN, sehingga tidak ada render-blocking script. **Wajib `npm run build`** sebelum deploy (Jenkinsfile sudah melakukannya dan `public/build` ikut ke paket). Jika `public/build` tidak ada, layout otomatis jatuh ke CDN agar situs tetap tampil.
+- `<meta name="description">` pada layout (bisa dioverride lewat variabel `$description`).
+- Halaman Login/Register memakai `<h1>`; urutan heading tidak melompat.
+- Semua input/select punya label terhubung (`for`/`id`) atau `aria-label`; link/tombol ikon punya nama aksesibel.
+- Warna teks memenuhi kontras WCAG AA (>= 4.5:1): `slate-600`, `rose-700`, `emerald-700`, dst.
+- Regresi dijaga oleh `tests/Feature/AccessibilityTest.php`.
+
 ## Pengujian
 ```bash
 composer test        # phpunit --coverage-text (butuh pcov / xdebug)
 composer audit
 ```
-
-nim:35
